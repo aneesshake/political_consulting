@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>R Markdown on A Hugo website</title>
+    <link>/tags/r-markdown/</link>
+    <description>Recent content in R Markdown on A Hugo website</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 01 Oct 2020 21:13:14 -0500</lastBuildDate><atom:link href="/tags/r-markdown/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Why do swing states matter so much?(Or some other political title)</title>
+      <link>/2020/10/01/why-do-swing-states-matter-so-muchor-some-other-political-title/</link>
+      <pubDate>Thu, 01 Oct 2020 21:13:14 -0500</pubDate>
+      
+      <guid>/2020/10/01/why-do-swing-states-matter-so-muchor-some-other-political-title/</guid>
+      <description>Non-Technical executive summaryA little bit about the purpose of this survey, and
+IntroductionThis is the part where we should write why we’re doing this. Which riding/province we’re focusing on and why them.
+Survey methodologyIn this part we can talk about how we’ve set our survey up. We should probably make references to the readings here(p.13 of Wu &amp;amp; Thompson reading).Inlcude a link for people to see what questions we’re asked.</description>
+    </item>
+    
+  </channel>
+</rss>

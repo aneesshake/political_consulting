@@ -1,0 +1,78 @@
+---
+title: "Why do swing states matter so much?(Or some other political title)"
+author: "Jaffa Romain & Anees Shaikh"
+abstract: "idk if this is super needed since he hasn't put it in the pdf"
+date: 2020-10-01T21:13:14-05:00
+categories: ["R"]
+tags: ["R Markdown", "plot", "regression"]
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE)
+```
+
+```{r,echo=FALSE, message=FALSE}
+#Code chunks with all our imports
+library(tidyverse)
+library(skimr)
+library(visdat)
+```
+# Non-Technical executive summary
+
+A little bit about the purpose of this survey, and
+
+# Introduction
+
+This is the part where we should write why we're doing this. Which riding/province we're focusing on and why them. 
+
+
+# Survey methodology
+
+In this part we can talk about how we've set our survey up. We should probably make references to the readings here(p.13 of Wu & Thompson reading).
+Inlcude a link for people to see what questions we're asked. 
+
+Things we should write down here:
+
+- Population
+- Frame
+- sample
+- sampling methods
+- how we reached our desired respondents
+- cost
+- steps we took to deal with non-respondents and effects(we could show this via a graph too)
+
+
+# Results
+
+**We find that most people that make a lot of money...**
+
+# Discussions
+
+
+# Weaknesses and Biases
+
+
+# Code appendix
+
+```{r}
+#Code to simulate data based on method of sampling we've chosen
+
+#most likely going to have to use some form of 
+  #set.seed
+  #rnorm(2000, mean = x, sd = y)
+```
+
+
+```{r}
+#EDA for our data
+```
+
+
+
+```{r,echo=FALSE, message=FALSE}
+#code chunks for all our citations
+library(tidyverse)
+library(skimr)
+library(visdat)
+```
+
