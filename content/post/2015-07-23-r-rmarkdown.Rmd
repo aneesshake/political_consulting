@@ -23,7 +23,10 @@ A little bit about the purpose of this survey, and
 
 # Introduction
 
-This is the part where we should write why we're doing this. Which riding/province we're focusing on and why them. 
+This is the part where we should write why we're doing this. For the purpose of this survey, we'll be focusing on the riding of Richmond Hill in Ontario. This is a riding that can be categorized as a **swing riding**. Swing ridings are ridings that may change allegiances to parties between elections, or have hotly contested votes. They represent a keen focus of most political parties, as elections can come down to the wire, and swing ridings often make the difference. 
+
+## Richmond Hill electory history
+Richmond Hill has swung between Conservatives and Liberals  
 
 
 # Survey methodology
@@ -44,7 +47,111 @@ Things we should write down here:
 
 # Results
 
-**We find that most people that make a lot of money...**
+
+
+
+```{r,echo=FALSE, message=FALSE}
+#code chunks for all our libraries
+library(tidyverse)
+library(skimr)
+library(visdat)
+```
+
+
+
+```{r}
+#Simulation of Q:  Whom did you vote for in the last elections?
+list_of_parties <- c("Liberals", "Conservatives", "Green Party", "NDP", "People's", "Rhinoceros")
+
+prob_of_voting <- c(0.44,0.42,0.03,0.08,0.01,0.002)
+
+
+#graphing the simulation
+sample(list_of_parties, 37000, replace = TRUE, prob = prob_of_voting) %>% 
+  as_tibble() %>% 
+  rename(party_2019 = value) %>% 
+  ggplot(aes(x = party_2019, fill = party_2019)) + 
+  geom_bar() + 
+  scale_fill_manual(values = c("blue", "green", "red", "orange", "brown", "pink")) +
+  labs(title = "Surveyor response to: Whom did you vote for in the 2019 federal elections?",
+       subtitle = "The People's party and Rhinoceros party were new additions to this election.",
+       x = "Federal Party",
+       y = "Number of votes",
+       fill = "Party",
+       tag = "[1]")
+
+
+
+```
+
+
+
+```{r}
+#Simulation of Q:  Whom did you vote for in the 2015 elections?
+list_of_parties <- c("Liberals", "Conservatives", "Green Party", "NDP")
+
+prob_of_voting <- c(0.46,0.43,0.03,0.08)
+
+sum(prob_of_voting)
+
+#graphing the simulation
+sample(list_of_parties, 37000, replace = TRUE, prob = prob_of_voting) %>% 
+  as_tibble() %>% 
+  rename(party_2015 = value) %>% 
+  ggplot(aes(x = party_2015, fill = party_2015)) + 
+  geom_bar() + 
+  scale_fill_manual(values = c("blue", "green", "red", "orange", "brown", "pink")) +
+  labs(title = "Surveyor response to: Whom did you vote for in the 2015 federal elections?",
+       x = "Federal Party",
+       y = "Number of votes",
+       fill = "Party",
+       tag = "[2]")
+```
+```{r}
+#Simulation of Q:  Overall, how would you rate the performance of the current federal government party(1-10)?
+set.seed(1)
+
+
+#graphing the simulation
+rnorm(37000, mean = 7, sd  = 1) %>% 
+  as_tibble() %>% 
+  rename(rating = value) %>% 
+  ggplot(aes(x = rating)) + 
+  geom_histogram() +  
+  labs(title = "How would you rate the performance of the current federal government party?",
+       subtitle = "The rating was on a scale of 1-10",
+       x = "Rating",
+       y = "Number of responses",
+       tag = "[3]")
+```
+
+
+
+
+
+```{r}
+#Simulation of Q:  If you could vote tomorrow, which of the parties would you vote for?
+list_of_parties <- c("Liberals", "Conservatives", "Green Party", "NDP","Other")
+
+prob_of_voting <- c(0.446,0.444,0.025,0.08,0.005)
+
+sum(prob_of_voting)
+
+#graphing the simulation
+sample(list_of_parties, 37000, replace = TRUE, prob = prob_of_voting) %>% 
+  as_tibble() %>% 
+  rename(party_2020 = value) %>% 
+  ggplot(aes(x = party_2020, fill = party_2020)) + 
+  geom_bar() + 
+  scale_fill_manual(values = c("blue", "green", "red", "orange", "brown", "pink")) +
+  labs(title = "If you could vote tomorrow, which of the parties would you vote for?",
+       x = "Federal Party",
+       y = "Number of votes",
+       fill = "Party",
+       tag = "[4]")
+```
+
+
 
 # Discussions
 
@@ -54,25 +161,12 @@ Things we should write down here:
 
 # Code appendix
 
-```{r}
-#Code to simulate data based on method of sampling we've chosen
 
-#most likely going to have to use some form of 
-  #set.seed
-  #rnorm(2000, mean = x, sd = y)
-```
-
-
-```{r}
-#EDA for our data
-```
 
 
 
 ```{r,echo=FALSE, message=FALSE}
-#code chunks for all our citations
-library(tidyverse)
-library(skimr)
-library(visdat)
+
+citation("tidyverse")
 ```
 
