@@ -16,6 +16,7 @@ knitr::opts_chunk$set(collapse = TRUE)
 library(tidyverse)
 library(skimr)
 library(visdat)
+library(gganimate)
 ```
 # Non-Technical executive summary
 
@@ -26,38 +27,56 @@ A little bit about the purpose of this survey, and
 This is the part where we should write why we're doing this. For the purpose of this survey, we'll be focusing on the riding of Richmond Hill in Ontario. This is a riding that can be categorized as a **swing riding**. Swing ridings are ridings that may change allegiances to parties between elections, or have hotly contested votes. They represent a keen focus of most political parties, as elections can come down to the wire, and swing ridings often make the difference. 
 
 ## Richmond Hill electory history
-Richmond Hill has swung between Conservatives and Liberals  
+Richmond Hill has voted mostly Liberal since it's inception as a riding in 2004. However, the animation below showcases some key points:
 
+1.The Liberals once had a strong hold of the riding, contesting 60% of the votes in 2004. They've been on a sharp decline since, not being able to reclaim that status ever since.
+
+2. The Conservatives have seen a strong increase in the votes they receive. The most recent election in 2019 saw the Liberals beat out the conservatives by a slim 112 votes. The Conservatives were able to swing the riding once in 2011, but lost out again in 2015.
+
+3. The riding is mostly contested by the Liberals and the Conservatives. NDP saw an increase in 2011 but soon returned to a previous proportion in subsequent years.
+
+ Based on projections from Canada338, Richmond Hill would not be red if an election were held today. This is precisely why The Liberal party must pay attention to this riding. The GTA is typically a liberal 
+
+
+```{r}
+years <- c(2019,2019,2019,2019,2015,2015,2015,2015,2011,2011,2011,2011,2008,2008,2008,2008,2006,2006,2006,2006,2004,2004,2004,2004)
+party <- c("Liberal", "Conservative","NDP","Green","Liberal", "Conservative","NDP","Green","Liberal", "Conservative","NDP","Green","Liberal", "Conservative","NDP","Green","Liberal", "Conservative","NDP","Green","Liberal", "Conservative","NDP","Green")
+votes <- c(21804,21592,4425,1695,23032,21275,3950,856,15160,18521,7245,1612,21488,16318,4526,3388,27837,16564,5176,2379,27102,11530,4495,2144)
+
+rhill_election_results <- data.frame(years,party,votes) %>% as_tibble()
+
+
+rhill_election_results %>% 
+  group_by(years) %>% 
+  summarise(party = party, percentage_votes = prop.table(votes) * 100) %>% 
+  ggplot((aes(x = years, y = percentage_votes, color = party))) + 
+  geom_line() + 
+  geom_point() + 
+  scale_color_manual(values = c("blue", "green", "red", "orange")) +
+  labs(title = "A timeline of the voting history of Richmond Hill",
+       subtitle = "notice the turning tide and extremely close gap in 2019",
+       x = "year",
+       y = "percentage of votes") + 
+  transition_reveal(years)
+```
 
 # Survey methodology
 
-In this part we can talk about how we've set our survey up. We should probably make references to the readings here(p.13 of Wu & Thompson reading).
-Inlcude a link for people to see what questions we're asked. 
+The survey: https://www.surveymonkey.com/r/D8KBRNN?fbclid=IwAR1iL8B_kYBasO4GNID5cdS44hBCHFtMgJsRToi31fUFA68Ag2d1YfnTYjQ
 
-Things we should write down here:
+The target population of the survey is all the residents of Richmond hill Riding that are eligible to vote.  The frame is all the people of the riding whose email-address or phone number are available to us. The sample is all the people among the frame population who are willing to take our surveys.
+We use both stratified sampling and SRSWOR in the survey. We consider each neighborhood of the riding as a stratum and randomly collect samples without replacement from each stratum. Therefore, each riding has the same proportion in the sample as it does in the target population.  Also, any resident can be selected at most once because everyone has only one vote. The theorem of SRSWOR suggests that the design-based variance of mu_y (mean of the response) will be very small when the sample size is large relative to the population.
 
-- Population
-- Frame
-- sample
-- sampling methods
-- how we reached our desired respondents
-- cost
-- steps we took to deal with non-respondents and effects(we could show this via a graph too)
+
+
+
+
+
+
+
 
 
 # Results
-
-
-
-
-```{r,echo=FALSE, message=FALSE}
-#code chunks for all our libraries
-library(tidyverse)
-library(skimr)
-library(visdat)
-```
-
-
 
 ```{r}
 #Simulation of Q:  Whom did you vote for in the last elections?
@@ -75,6 +94,7 @@ sample(list_of_parties, 37000, replace = TRUE, prob = prob_of_voting) %>%
   scale_fill_manual(values = c("blue", "green", "red", "orange", "brown", "pink")) +
   labs(title = "Surveyor response to: Whom did you vote for in the 2019 federal elections?",
        subtitle = "The People's party and Rhinoceros party were new additions to this election.",
+       caption = "Source: Simulated data.",
        x = "Federal Party",
        y = "Number of votes",
        fill = "Party",
@@ -102,6 +122,7 @@ sample(list_of_parties, 37000, replace = TRUE, prob = prob_of_voting) %>%
   geom_bar() + 
   scale_fill_manual(values = c("blue", "green", "red", "orange", "brown", "pink")) +
   labs(title = "Surveyor response to: Whom did you vote for in the 2015 federal elections?",
+       caption = "Source: Simulated data.",
        x = "Federal Party",
        y = "Number of votes",
        fill = "Party",
@@ -120,6 +141,7 @@ rnorm(37000, mean = 7, sd  = 1) %>%
   geom_histogram() +  
   labs(title = "How would you rate the performance of the current federal government party?",
        subtitle = "The rating was on a scale of 1-10",
+       caption = "Source: Simulated data.",
        x = "Rating",
        y = "Number of responses",
        tag = "[3]")
@@ -133,7 +155,7 @@ rnorm(37000, mean = 7, sd  = 1) %>%
 #Simulation of Q:  If you could vote tomorrow, which of the parties would you vote for?
 list_of_parties <- c("Liberals", "Conservatives", "Green Party", "NDP","Other")
 
-prob_of_voting <- c(0.446,0.444,0.025,0.08,0.005)
+prob_of_voting <- c(0.441,0.449,0.025,0.08,0.005)
 
 sum(prob_of_voting)
 
@@ -145,10 +167,155 @@ sample(list_of_parties, 37000, replace = TRUE, prob = prob_of_voting) %>%
   geom_bar() + 
   scale_fill_manual(values = c("blue", "green", "red", "orange", "brown", "pink")) +
   labs(title = "If you could vote tomorrow, which of the parties would you vote for?",
+       caption = "Source: Simulated data.",
        x = "Federal Party",
        y = "Number of votes",
        fill = "Party",
        tag = "[4]")
+```
+
+
+
+```{r}
+#Simulation of Q:  If you could vote tomorrow, which of the parties would you vote for?
+employment <- c("working full-time", "working part-time", "looking for work", "NOT looking for work", "retired", "disabled, not able to work", "Full-time student")
+
+sample(employment, 37000, replace = TRUE) %>% 
+  as_tibble() %>% 
+  rename(employment_status = value) %>% 
+  ggplot(aes(x = employment_status, fill = employment_status)) + 
+  geom_bar() + coord_flip() +
+  labs(title = "Employment status",
+       caption = "Source: Simulated data.",
+       x = "status",
+       y = "Number of people",
+       fill = "Employment status",
+       tag = "[5]")
+
+
+
+```
+```{r}
+#Q: What range does your household income fall into?
+incomes <- c("Under $15,000", "Between $15,000 and $29,999", "Between $30,000 and $49,999", "Between $50,000 and $74,999", "Between $75,000 and $99,999", "Between $100,000 and $150,000", "Over $150,000")
+
+
+sample(incomes, 37000, replace = TRUE) %>% 
+  as_tibble() %>% 
+  rename(income_range = value) %>% 
+  ggplot(aes(x = income_range, fill = income_range)) + 
+  geom_bar() + coord_flip() +
+  labs(title = "Income range of residents of Richmond Hill",
+       caption = "Source: Simulated data.",
+       x = "Income Range",
+       y = "Number of people",
+       fill = "Income range",
+       tag = "[6]")
+
+
+```
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+```{r}
+#Q: What is your age group?
+age_groups <- c("18-24", "25-34", "35-44", "45-54", "55-64", "65+")
+
+
+sample(age_groups, 37000, replace = TRUE) %>% 
+  as_tibble() %>% 
+  rename(age_group = value) %>% 
+  ggplot(aes(x = age_group, fill = age_group)) + 
+  geom_bar() + coord_flip() +
+  labs(title = "Distribution of age in Richmond Hill",
+       caption = "Source: Simulated data.",
+       x = "Age group",
+       y = "Number of people",
+       fill = "Age group brackets",
+       tag = "[7]")
+
+
+```
+ 
+ 
+ 
+ 
+ 
+
+```{r}
+#Q: Are you in favour of increased or reduced government spending
+
+government_spending <- c("Increased Spending", "Reduced Spending", 
+                         "Neutral")
+
+as_factor(government_spending)
+
+sample(government_spending, 37000, replace = TRUE) %>% 
+  as_tibble() %>% 
+  rename(favour = value) %>% 
+  ggplot(aes(x = favour, fill = favour)) + 
+  geom_bar() + coord_flip() +
+  labs(title = "Resident's views towards government spending",
+       caption = "Source: Simulated data.",
+       x = "Type of spending",
+       y = "Number of people",
+       fill = "In Favour of",
+       tag = "[8]")
+
+```
+
+
+```{r}
+#Q Which of these issues would you consider to be of most importance ahead of the next election
+
+most_important_issues <- c("Affordable housing", "Balancing the budget", "Privatization of healthcare", "Immigration", "Unemployment", "Climate change")
+
+
+most_important_issues_prob <- c(0.25,0.15,0.005,0.005,0.25,0.3)
+
+sum(most_important_issues_prob)
+
+sample(most_important_issues, 37000, replace = TRUE,prob = most_important_issues_prob) %>% 
+  as_tibble() %>% 
+  rename(issue = value) %>% 
+  ggplot(aes(x = issue, fill = issue)) + 
+  geom_bar() + coord_flip() +
+  labs(title = "Most important issues for Richmond Hill residents",
+       caption = "Source: Simulated data.",
+       x = "Issue",
+       y = "Number of people",
+       fill = "Issue",
+       tag = "[9]")
+
+```
+
+
+
+```{r}
+#Q Which of these issues would you consider to be of least importance ahead of the next election
+
+least_important_issues <- c("Affordable housing", "Balancing the budget", "Privatization of healthcare", "Immigration", "Unemployment", "Climate change")
+
+
+least_important_issues_prob <- c(0.005,0.25,0.3,0.25,0.15,0.005)
+
+sum(most_important_issues_prob)
+
+sample(least_important_issues, 37000, replace = TRUE, prob = least_important_issues_prob) %>% 
+  as_tibble() %>% 
+  rename(issue = value) %>% 
+  ggplot(aes(x = issue, fill = issue)) + 
+  geom_bar() + coord_flip() +
+  labs(title = "Least important issues for Richmond Hill residents",
+       caption = "Source: Simulated data.",
+       x = "Issue",
+       y = "Number of people",
+       fill = "Issue",
+       tag = "[10]")
 ```
 
 
@@ -159,7 +326,6 @@ sample(list_of_parties, 37000, replace = TRUE, prob = prob_of_voting) %>%
 # Weaknesses and Biases
 
 
-# Code appendix
 
 
 
