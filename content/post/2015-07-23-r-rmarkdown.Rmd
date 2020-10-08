@@ -1,16 +1,18 @@
 ---
 title: 'The rising blue tide. A statistical analysis of federal party opinion in Richmond Hill '
 author: "Jaffa Romain, Taojun Wang, and Anees Shaikh"
-date: '2020-10-01T21:13:14-05:00'
+date: '2020-10-07T21:13:14-05:00'
 output:
+  pdf_document: default
   html_document:
     df_print: paged
-  pdf_document: default
 categories: R
 ---
-Date: 2020-10-06
+Date: 2020-10-07
 
 Authored by: Jaffa Romain, Anees Shaikh, and Taojun Wang.
+
+This content can also be accessed at https://thirsty-wozniak-d4cb1f.netlify.app/2020/10/01/the-rising-blue-tide.-a-statistical-analysis-of-federal-party-opinion-in-richmond-hill/?fbclid=IwAR2LqAHqmmKUpEbHnddpBU90NrxEKuKxaDjW_aja9OllOO-Z9WVToWLyTFw (on the webpage, an animation is available that isn't available on the pdf format)
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(collapse = TRUE)
 ```
@@ -51,13 +53,13 @@ For this month's polling update, we'd like to provide an update on the Ontario r
 - Langstaff
 - Doncrest
 
-Since being represented in the House of Commons, the Liberal party has dominated in federal elections, winning three consecutive elections between 2004-2008.However, recent elections have not only shown a decline in Liberal voters, but also an increase in Conservative votes. Richmond hill is now a swing riding, where one party sweeping the riding could be decisive in terms of winning the election. Swing ridings are electoral districts that elect different parties during elections. This should be an important area of focus for the Liberal party as it may decide the fate of the next election. The party benefits by receiving this poll in a few ways. Chiefly, this polling update aims to answer a few questions and provide the party with actionable data. Ultimately, there is an opportunity cost associated with every decision a political party makes. By opting for a data driven approach, the Liberal party can make a well informed decision to invest in an area or realise that they might have to focus their efforts in ridings that may prove more fruitful.
+Since being represented in the House of Commons, the Liberal party has dominated in federal elections, winning three consecutive elections between 2004-2008.However, recent elections have not only shown a decline in Liberal voters, but also an increase in Conservative votes. Richmond hill is now a swing riding, where one party sweeping the riding could be decisive in terms of winning the election. Swing ridings are electoral districts that elect different parties during elections. This should be an important area of focus for the Liberal party as it may decide the fate of the next election. The party benefits by receiving this poll in a few ways. Chiefly, this polling update aims to answer a few questions and provide the party with actionable data. Ultimately, there is an opportunity cost associated with every decision a political party makes. By opting for a data driven approach, the Liberal party can make a well-informed decision to invest in an area or realize that they might have to focus their efforts in ridings that may prove more fruitful.
 
 Some of the questions include:
 
 - How have residents voted in the past? This helps us establish whether they've voted predominantly one party, or are a swing party. The implications of this help the Liberal party plan accordingly. In the event of it being a swing riding, the party might have to concentrate it's efforts to swing the vote their way.
 
-- What are their current attitudes towards the Liberal Party? Essentially, this questions provides the party with a pulse of how the riding is currently doing. The benefit of this question will help the party divert its efforts accordingly. If the riding holds a favourable view, then the party may better spend its efforts elsewhere. 
+- What are their current attitudes towards the Liberal Party? Essentially, this question provides the party with a pulse of how the riding is currently doing. The benefit of this question will help the party divert its efforts accordingly. If the riding holds a favourable view, then the party may better spend its efforts elsewhere. 
 
 - How do they measure on some important demographic variables? This information helps the party understand their voter base better. By gaining this understanding, the Liberals can create an effective strategy to drive up the votes here and possibly apply this strategy to other such ridings that exhibit similar responses. As well, the party stands to gain important information about what matters most to their constituents. Announcing policies about climate change might not be as effective as announcing the creation of new jobs in this riding. Without knowing this information, however, they might have an inefficient media strategy.
 
@@ -68,21 +70,21 @@ Results from the survey indicate that the liberals may not be able to capture th
 
 # Introduction
 
-Richmond hill is the focus of our survey. This riding was chosen on the basis of it's unstable leanings. It represents an opportunity for the Liberal party to spend time researching and creating an effective action plan.  Swing ridings are ridings that may change allegiances to parties between elections, or have hotly contested votes. With it's recent history and extremely close elections, Richmond hill can be categorized as swing riding. Readers may be familiar with swing states in the US, however, the voting system is quite different in Canada. Since provinces do not vote the same way states do, Canada has swing ridings. They serve a similar purpose and often become the battlegrounds of political parties. They represent a keen focus of most political parties, as elections can come down to the wire, and swing ridings often make the difference.
+Richmond hill is the focus of our survey. This riding was chosen on the basis of its unstable leanings. It represents an opportunity for the Liberal party to spend time researching and creating an effective action plan.  Swing ridings are ridings that may change allegiances to parties between elections or have hotly contested votes. With its recent history and extremely close elections, Richmond hill can be categorized as swing riding. Readers may be familiar with swing states in the US; however, the voting system is quite different in Canada. Since provinces do not vote the same way states do, Canada has swing ridings. They serve a similar purpose and often become the battlegrounds of political parties. They represent a keen focus of most political parties, as elections can come down to the wire, and swing ridings often make the difference.
 
 ## Richmond Hill electory history
 Richmond Hill has voted mostly Liberal since it's inception as a riding in 2004. However, the animation below showcases some key points:
 
 1. The Liberals once had a strong hold of the riding, contesting 60% of the votes in 2004. They've been on a sharp decline since, not being able to reclaim that status ever since.
 
-2. The Conservatives have seen a strong increase in the votes they receive. The most recent election in 2019 saw the Liberals beat out the conservatives by a slim 112 votes. The Conservatives were able to swing the riding once in 2011, but lost out again in 2015.
+2. The Conservatives have seen a strong increase in the votes they receive. The most recent election in 2019 saw the Liberals beat out the conservatives by a slim 112 votes. The Conservatives were able to swing the riding once in 2011 but lost out again in 2015.
 
 3. The riding is mostly contested by the Liberals and the Conservatives. NDP saw an increase in 2011 but soon returned to a previous proportion in subsequent years.
 
-Based on survey results, Richmond Hill would not be red if an election were held today. This is precisely why The Liberal party must pay attention to this riding.
+Based on survey results, Richmond Hill would not be red if an election were held today. This is precisely why the Liberal party must pay attention to this riding.
 
 
-```{r, echo=FALSE, warning=FALSE}
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
 
 #Data in this chunk is not a simulation. We've pulled this data from Elections canada to get the official election results. We've manually created a df here and then made a little animation to showcase the movement. This is admittedly a really manual way of creating DFs. If there was a cesR package but for elections results, it would greatly speed up the process.
 
@@ -110,8 +112,7 @@ rhill_election_results %>%
        subtitle = "Notice the turning tide and extremely close gap in 2019",
        caption = "Source: Elections Canada",
        x = "Year",
-       y = "Percentage of votes") + 
-  transition_reveal(years)
+       y = "Percentage of votes") + transition_reveal(years)
 ```
 
 # Survey methodology
@@ -120,6 +121,7 @@ The survey: https://www.surveymonkey.com/r/D8KBRNN?fbclid=IwAR1iL8B_kYBasO4GNID5
 
 The target population of the survey is all the residents of Richmond hill Riding that are eligible to vote.  The frame is all the people of the riding whose email-address or phone number are available to us. The sample is all the people among the frame population who are willing to take our surveys.
 To sample, we used stratified sampling, separating the riding into stratums and randomly collecting samples without replacement from each stratum. Each stratum represents a neighbourhood in the riding from the following:
+
 - Elgin Mills
 - Bayview North
 - Bayview South
@@ -132,9 +134,9 @@ To sample, we used stratified sampling, separating the riding into stratums and 
 
 Therefore, each stratum has the same proportion in the sample as it does in the target population. Also, any resident can be selected at most once because everyone has only one vote. The theorem of SRSWOR suggests that the design-based variance of $$\bar{y}$$ is given by: $$V(\bar{y}) = (1 - (n/N)*(\sigma^2_y/n)$$. Intuitively, this means that we can expect for the variance of each sampled stratum to be very small when the sample size is large relative to the population. The theorem also tells us that the sample mean $$\bar{y}$$ is a design-unbiased estimator for the true population mean: $$E(\bar{y}) = \mu_y$$. We will use phone calls and email to reach our desired respondents, and each survey is estimated to take about 5 minutes. 
 
-To reduce non-response, we have tried to make the survey more user-friendly, attractive(clean interface), non-intrusive(doesn't collect any personal information), and time-conscious. If the non-responses are few and are randomly spread in the target population, then they can be neglected in the analysis. Non-response in certain questions can lead to different numbers of observations in the same variable, which might make it harder to construct a model. Non-response of some people(empty questionnaires) will make our sample less reflective if they are from some specific groups, which could lead to bias towards a particular group. In this case, we need to adjust the weights in our sample to have a sample reflective of the population we wish to observe.
+To reduce non-response, we have tried to make the survey more user-friendly, attractive (clean interface), non-intrusive (doesn't collect any personal information), and time-conscious. If the non-responses are few and are randomly spread in the target population, then they can be neglected in the analysis. Non-response in certain questions can lead to different numbers of observations in the same variable, which might make it harder to construct a model. Non-response of some people (empty questionnaires) will make our sample less reflective if they are from some specific groups, which could lead to bias towards a particular group. In this case, we need to adjust the weights in our sample to have a sample reflective of the population we wish to observe.
 
-Finally to protect respondent privacy, the entire survey will be anonymous and includes no information which indicates respondents’ identity. Additionally, we're greatly limiting the types of information we're collecting that could be qualified as Personally Identifiable Information(PII). Also, in terms of some relatively sensitive information such as age and household income, respondents just need to select a range instead of the exact number to further ensure confidentiality.
+Finally, to protect respondent privacy, the entire survey will be anonymous and includes no information which indicates respondents’ identity. Additionally, we're greatly limiting the types of information we're collecting that could be qualified as Personally Identifiable Information (PII). Also, in terms of some relatively sensitive information such as age and household income, respondents just need to select a range instead of the exact number to further ensure confidentiality.
 
 # Results
 
@@ -340,7 +342,7 @@ survey_results %>%
        y = "Number of responses",
        tag = "[8]")
 ```
-Figure 8 indicates a poor approval rating from the respondents. With an average score of 5, residents don't seem to be pleased with the current performance of the Justin Trudeau's Liberals.
+Figure 8 indicates a poor approval rating from the respondents. With an average score of 5, residents do not seem to be pleased with the current performance of the Justin Trudeau's Liberals.
 ```{r, echo=FALSE}
 #Q Which of these issues would you consider to be of most importance ahead of the next election
 survey_results %>% 
@@ -373,14 +375,14 @@ labs(title = "Figure 10: Least important issues",
 
 
 ```
-From figures 9 and 10, we gather that the residents of Richmond hill find some issues much more important than others. Primarily, they are concerned with unemployment, immigration, and affordable housing. They don't seem to be too concerned with issues such as Climate Change.
+From figures 9 and 10, we gather that the residents of Richmond hill find some issues much more important than others. Primarily, they are concerned with unemployment, immigration, and affordable housing. They do not seem to be too concerned with issues such as Climate Change.
 
 
 # Discussions
 
 The results of the survey can be distilled into a few key points: 
 
-- The Liberal party has had close calls in their 2 recent elections for Richmond hill. Even in 2015, when the Liberals were able to reclaim GTA from the Conservatives, the election wasn't an easy victory.
+- The Liberal party has had close calls in their 2 recent elections for Richmond hill. Even in 2015, when the Liberals were able to reclaim GTA from the Conservatives, the election wasn't an easy victory. An important consideration is that the current MP, Majid Jowhari, was an incumbent in the last election. If he were to retire, that may lower their popularity even more.
 
 
 ```{r, fig.cap="2011 riding map of the GTA. Source: CBC News",include=TRUE, echo=FALSE}
@@ -393,9 +395,6 @@ knitr::include_graphics("img/2015_riding_map.png")
 ```
 
 - In-spite of a recent win, survey results seem to indicate that a Conservative win would be most likely. It is possible that this information is a response to incidents in the past couple of months. There have been several notable happenings that may be driving this swing. For instance, the We Charity controversy and the federal government's response to the COVID-19 pandemic. By itself, this is but one of multiple data points that must be viewed in a broader context to gain something meaningful.
-
-- Respondents seem to be
-
 
 
 # Weaknesses, biases, and next steps
@@ -477,28 +476,6 @@ The survey can be accessed at: https://www.surveymonkey.com/r/D8KBRNN?fbclid=IwA
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-![](img/important_issues.png)
-```{r}
-knitr::include_graphics('img/age_range.png')
-knitr::include_graphics('img/2019_result.png')
-```
 
 
 
